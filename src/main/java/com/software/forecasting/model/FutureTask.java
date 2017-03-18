@@ -6,19 +6,22 @@ import java.util.*;
  * Created by odyssefs on 18.03.17.
  */
 public class FutureTask {
+  private Integer effort;
+  private Set<String> tasks;
+
   protected Map<List<String>, Set<Integer>> categorise(Map<Integer, List<String>> futureTasks, Map<Integer, List<String>> historicalData) {
     Map<List<String>, Set<Integer>> categorisedFutureTasks = new HashMap<>();
 
     futureTasks.forEach(
-        (index, tasks) -> collectCategoriesByHistoryData(historicalData, categorisedFutureTasks, tasks)
+        (effort, tasks) -> collectCategoriesByHistoryData(historicalData, categorisedFutureTasks, tasks)
     );
     return categorisedFutureTasks;
   }
 
   private void collectCategoriesByHistoryData(Map<Integer, List<String>> historicalData, Map<List<String>, Set<Integer>> categorisedFutureTasks, List<String> tasks) {
-    Set<Integer> indexFoundedInHistoryData = new HashSet<Integer>();
+    Set<Integer> indexFoundedInHistoryData = new HashSet<>();
     historicalData.forEach(
-        (indexHD, tasksHD) -> {
+        (effortHD, tasksHD) -> {
           final Integer[] countTasks = {0};
           tasks.forEach(
               (task) -> {
@@ -27,13 +30,25 @@ public class FutureTask {
               }
           );
           if (countTasks[0].equals(tasks.size()))
-            indexFoundedInHistoryData.add(indexHD);
+            indexFoundedInHistoryData.add(effortHD);
         }
     );
     categorisedFutureTasks.put(tasks, indexFoundedInHistoryData);
   }
 
-  protected Map<Integer, Set<String>> readHistoricalData (){
-    return null;
+  public Set<String> getTasks() {
+    return tasks;
+  }
+
+  public void setTasks(Set<String> tasks) {
+    this.tasks = tasks;
+  }
+
+  public Integer getEffort() {
+    return effort;
+  }
+
+  public void setEffort(Integer effort) {
+    this.effort = effort;
   }
 }
