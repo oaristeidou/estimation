@@ -33,7 +33,7 @@ public class FutureTaskTest {
 
     Map<List<String>, Set<Integer>> exceptedCategorisedData = new HashMap<>();
     exceptedCategorisedData.put(new ArrayList<String>(Arrays.asList("x")), new HashSet<>(Arrays.asList(1, 3, 6, 9)));
-    exceptedCategorisedData.put(new ArrayList<String>(Arrays.asList("x", "y")), new HashSet<>(Arrays.asList(3, 9)));
+    exceptedCategorisedData.put(new ArrayList<String>(Arrays.asList("x", "y")), new HashSet<>(Arrays.asList(1, 2, 3, 6, 8, 9)));
     exceptedCategorisedData.put(new ArrayList<String>(Arrays.asList("-")), new HashSet<>(Arrays.asList(4, 7)));
     FutureTask futureTask = new FutureTask();
 
