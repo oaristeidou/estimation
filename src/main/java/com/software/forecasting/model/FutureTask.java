@@ -11,27 +11,19 @@ public class FutureTask {
 
   protected Map<List<String>, Set<Integer>> categorise(Map<Integer, List<String>> futureTasks, Map<Integer, List<String>> historicalData) {
     Map<List<String>, Set<Integer>> categorisedFutureTasks = new HashMap<>();
-
-    futureTasks.forEach(
-        (effort, tasks) -> collectCategoriesByHistoryData(historicalData, categorisedFutureTasks, tasks)
-    );
+    futureTasks.forEach((effort, tasks) -> collectCategoriesByHistoryData(historicalData, categorisedFutureTasks, tasks));
     return categorisedFutureTasks;
   }
 
   private void collectCategoriesByHistoryData(Map<Integer, List<String>> historicalData, Map<List<String>, Set<Integer>> categorisedFutureTasks, List<String> tasks) {
     Set<Integer> indexFoundedInHistoryData = new HashSet<>();
     historicalData.forEach(
-        (effortHD, tasksHD) -> {
-          final Integer[] countTasks = {0};
-          tasks.forEach(
-              (task) -> {
-                if (tasksHD.contains(task))
-                  countTasks[0]++;
-              }
-          );
-          if (countTasks[0].equals(tasks.size()))
-            indexFoundedInHistoryData.add(effortHD);
-        }
+        (effortHD, tasksHD) -> tasks.forEach(
+            (task) -> {
+              if (tasksHD.contains(task))
+                indexFoundedInHistoryData.add(effortHD);
+            }
+        )
     );
     categorisedFutureTasks.put(tasks, indexFoundedInHistoryData);
   }
