@@ -1,7 +1,5 @@
 package com.software.forecasting.model;
 
-import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
-
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
