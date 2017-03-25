@@ -1,0 +1,134 @@
+{
+  "chart": {
+    "zoomType": "xy"
+  },
+  "title": {
+    "text": "Application Kata: Software Forecasting"
+  },
+  "subtitle": {
+    "text": "Source: https://paper.dropbox.com/doc/Application-Kata-Software-Forecasting-bYEyp2HjiCgWbyaRIVlmQ"
+  },
+  "xAxis": [
+    {
+      "categories": [
+        15,
+        17,
+        20,
+        24,
+        27,
+        30,
+        34,
+        35,
+        38,
+        39,
+        42,
+        45,
+        46,
+        48
+      ],
+      "crosshair": true
+    }
+  ],
+  "yAxis": [
+    {
+      "labels": {
+        "format": "{value}",
+        "categories": [
+          0.5,
+          1,
+          1.5,
+          2.0,
+          2.5,
+          3.0,
+          3.5
+
+        ],
+        "style": {
+          "color": "black"
+        }
+      },
+      "title": {
+        "text": "Total Effort",
+        "style": {
+          "color": "black"
+        }
+      }
+    },
+    {
+      "title": {
+        "text": "Risk",
+        "style": {
+          "color": "blue"
+        }
+      },
+      "labels": {
+        "format": "{value} %",
+        "style": {
+          "step": 0.5,
+          "color": "blue"
+        }
+      },
+      "opposite": true
+    }
+  ],
+  "tooltip": {
+    "shared": true
+  },
+  "legend": {
+    "layout": "vertical",
+    "align": "left",
+    "x": 120,
+    "verticalAlign": "top",
+    "y": 100,
+    "floating": true
+  },
+  "series": [
+    {
+      "name": "Total Effort",
+      "type": "column",
+      "data": [
+        1,
+        2,
+        1,
+        1,
+        3,
+        1,
+        1,
+        2,
+        2,
+        1,
+        2,
+        1,
+        1,
+        1
+      ],
+      "tooltip": {
+        "valueSuffix": " m"
+      }
+    },
+    {
+      "name": "Risk",
+      "type": "spline",
+      "yAxis": 1,
+      "data": [
+        90,
+        90,
+        80,
+        80,
+        60,
+        60,
+        50,
+        40,
+        30,
+        30,
+        20,
+        10,
+        10,
+        0
+      ],
+      "tooltip": {
+        "valueSuffix": " mm"
+      }
+    }
+  ]
+}
