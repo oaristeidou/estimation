@@ -32,8 +32,7 @@ public class RiskCalculationTest {
     expectedMap.put(45, Arrays.asList(1, 10));
     expectedMap.put(46, Arrays.asList(1, 10));
     expectedMap.put(48, Arrays.asList(1, 0));
-    RiskCalculation riskCalculation = new RiskCalculation();
 
-    assertEquals(riskCalculation.calculateRisk(efforts), expectedMap);
+    assertEquals(RiskCalculation.calculateRisk(efforts), expectedMap);
   }
 }

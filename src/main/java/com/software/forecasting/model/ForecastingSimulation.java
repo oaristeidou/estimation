@@ -1,7 +1,5 @@
 package com.software.forecasting.model;
 
-import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
-
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -11,7 +9,7 @@ import java.util.stream.IntStream;
  */
 public class ForecastingSimulation {
 
-  public List<Integer> simulate(Map<List<String>, Set<Integer>> futureTasksCategories, Map<Integer, List<String>> futureTasks) {
+  public static List<Integer> simulate(Map<List<String>, Set<Integer>> futureTasksCategories, Map<Integer, List<String>> futureTasks) {
     List<Integer> efforts = new ArrayList<>();
 
     IntStream

@@ -13,7 +13,6 @@ public class ReadCsvFileTest {
 
   @Test
   public void testReadHistoricalData() throws Exception {
-    ReadCsvFile readCsvFile = new ReadCsvFile();
     Map<Integer, Set<String>> expectedData = new HashMap<>();
     expectedData.put(1, new HashSet<>(Arrays.asList("x")));
     expectedData.put(2, new HashSet<>(Arrays.asList("y")));
@@ -25,7 +24,7 @@ public class ReadCsvFileTest {
     expectedData.put(8, new HashSet<>(Arrays.asList("y")));
     expectedData.put(9, new HashSet<>(Arrays.asList("y", "x")));
 
-    Map<Integer, Set<String>> readHistoricalData = readCsvFile.readHistoricalData();
+    Map<Integer, Set<String>> readHistoricalData = ReadCsvFile.readHistoricalData();
     expectedData.forEach(
         (effort, tasks) -> {
           assertEquals(readHistoricalData, expectedData);
