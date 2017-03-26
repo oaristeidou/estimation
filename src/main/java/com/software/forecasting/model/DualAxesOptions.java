@@ -126,18 +126,13 @@ public class DualAxesOptions extends Options {
     setChart(new ChartOptions()
         .setZoomType(ZoomType.XY));
 
-
     setTitle(new Title("Application Kata: Software Forecasting"));
-
-
     setSubtitle(new Title("Source: https://paper.dropbox.com/doc/Application-Kata-Software-Forecasting-bYEyp2HjiCgWbyaRIVlmQ"));
 
     EstimationAxis estimationAxis = new EstimationAxis();
     estimationAxis.setCategories(categories);
     estimationAxis.setCrosshair(Boolean.TRUE);
-
     setxAxis(estimationAxis);
-
 
     setyAxis(Arrays.asList(
         new Axis()
@@ -155,7 +150,6 @@ public class DualAxesOptions extends Options {
     setTooltip(new Tooltip()
         .setShared(Boolean.TRUE));
 
-
     setLegend(new Legend()
         .setLayout(LegendLayout.VERTICAL)
         .setAlign(HorizontalAlignment.RIGHT)
@@ -165,21 +159,6 @@ public class DualAxesOptions extends Options {
         .setBorderWidth(0)
         .setFloating(Boolean.TRUE));
 
-
-    Number[] numbersTotalEfforts = {1,
-        2,
-        1,
-        1,
-        3,
-        1,
-        1,
-        2,
-        2,
-        1,
-        2,
-        1,
-        1,
-        1};
     addSeries(new SimpleSeries()
         .setName("Total Effort")
         .setType(SeriesType.COLUMN)
@@ -188,21 +167,6 @@ public class DualAxesOptions extends Options {
             .setValueSuffix(" times"))
         .setData(integers));
 
-
-//    Number[] risks = {90,
-//        90,
-//        80,
-//        80,
-//        60,
-//        60,
-//        50,
-//        40,
-//        30,
-//        30,
-//        20,
-//        10,
-//        10,
-//        0};
     addSeries(new SimpleSeries()
         .setName("Risk")
         .setType(SeriesType.SPLINE)
