@@ -7,14 +7,14 @@ import java.util.stream.IntStream;
  * Created by odyssefs on 20.03.17.
  */
 public class RiskCalculation {
-  public Map<Integer, List<Integer>> calculateRisk (List<Integer> efforts){
+  public static Map<Integer, List<Integer>> calculateRisk (List<Integer> efforts){
     Map<Integer, Integer> partionedMap = createEffortPartitions (efforts);
     Map<Integer, List<Integer>> simulatedEfforts = mergeDuplicationEfforts (efforts, partionedMap);
     return simulatedEfforts;
 
   }
 
-  private Map<Integer, List<Integer>> mergeDuplicationEfforts(List<Integer> efforts, Map<Integer, Integer> partionedMap) {
+  private static Map<Integer, List<Integer>> mergeDuplicationEfforts(List<Integer> efforts, Map<Integer, Integer> partionedMap) {
     Map<Integer, List<Integer>> result = new HashMap<>();
     final int[] counter = {0};
     final Integer[] prevPercent = {90};
@@ -28,7 +28,7 @@ public class RiskCalculation {
     return result;
   }
 
-  private Map<Integer, Integer> createEffortPartitions(List<Integer> efforts) {
+  private static Map<Integer, Integer> createEffortPartitions(List<Integer> efforts) {
     int partitionRisk = 20;
     Map<Integer, Integer> result = new HashMap<>();
     IntStream.range(0, 10).forEach(

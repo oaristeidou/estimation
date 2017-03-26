@@ -2,4 +2,4 @@ server:
   port: 8081
 
 swagger:
-  paths: "/book.*|/monthsReportCalc.*"
+  paths: "/getEstimationHighChart.*"

@@ -9,13 +9,13 @@ public class FutureTask {
   private Integer effort;
   private Set<String> tasks;
 
-  protected Map<List<String>, Set<Integer>> categorise(Map<Integer, List<String>> futureTasks, Map<Integer, List<String>> historicalData) {
+  public static Map<List<String>, Set<Integer>> categorise(Map<Integer, List<String>> futureTasks, Map<Integer, Set<String>> historicalData) {
     Map<List<String>, Set<Integer>> categorisedFutureTasks = new HashMap<>();
     futureTasks.forEach((effort, tasks) -> collectCategoriesByHistoryData(historicalData, categorisedFutureTasks, tasks));
     return categorisedFutureTasks;
   }
 
-  private void collectCategoriesByHistoryData(Map<Integer, List<String>> historicalData, Map<List<String>, Set<Integer>> categorisedFutureTasks, List<String> tasks) {
+  private static void collectCategoriesByHistoryData(Map<Integer, Set<String>> historicalData, Map<List<String>, Set<Integer>> categorisedFutureTasks, List<String> tasks) {
     Set<Integer> indexFoundedInHistoryData = new HashSet<>();
     historicalData.forEach(
         (effortHD, tasksHD) -> tasks.forEach(

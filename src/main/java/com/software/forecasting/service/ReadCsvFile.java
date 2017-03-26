@@ -19,9 +19,9 @@ import java.util.*;
  */
 public class ReadCsvFile {
 
-  private final String fileName = ReadCsvFile.class.getClassLoader().getResource("docs/historical-data.csv").getPath();
+  private static final String fileName = ReadCsvFile.class.getClassLoader().getResource("docs/historical-data.csv").getPath();
 
-  protected Map<Integer, Set<String>> readHistoricalData() throws IOException {
+  public static Map<Integer, Set<String>> readHistoricalData() throws IOException {
     FileReader fileReader = new FileReader(fileName);
     CSVParser historicalDataFileParse = new CSVParser(fileReader, CSVFormat.newFormat(';'));
     Map<Integer, Set<String>> historicalDatanormilised = new HashMap<>();

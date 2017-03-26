@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
  */
 public class ForecastingSimulation {
 
-  public List<Integer> simulate(Map<List<String>, Set<Integer>> futureTasksCategories, Map<Integer, List<String>> futureTasks) {
+  public static List<Integer> simulate(Map<List<String>, Set<Integer>> futureTasksCategories, Map<Integer, List<String>> futureTasks) {
     List<Integer> efforts = new ArrayList<>();
 
     IntStream

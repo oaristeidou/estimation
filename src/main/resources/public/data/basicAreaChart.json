@@ -1,6 +1,6 @@
 {
   "chart": {
-    "zoomType": "xy"
+    "zoomType": "XY"
   },
   "title": {
     "text": "Application Kata: Software Forecasting"
