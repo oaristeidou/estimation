@@ -23,7 +23,7 @@ public class EstimationApi {
 
   @RequestMapping(value = "/getEstimationHighChart", method = RequestMethod.GET)
   @ResponseStatus(HttpStatus.FOUND)
-  @JsonSerialize(include=JsonSerialize.Inclusion.ALWAYS)
+  @JsonSerialize(include = JsonSerialize.Inclusion.ALWAYS)
   public Options getEstimationHighChart() throws IOException {
     Map<Integer, Set<String>> historicalData = ReadCsvFile.readHistoricalData();
 
@@ -39,6 +39,17 @@ public class EstimationApi {
 
     List<String> categoriesListString = Lists.transform(efforts, Functions.toStringFunction());
 
-    return new DualAxesOptions(categoriesListString);
+    Number[] integers = new Number[calculateRisk.size()];
+    Number[] risks = new Number[calculateRisk.size()];
+    final int[] index = {0};
+    calculateRisk.forEach(
+        (key, values) -> {
+          integers[index[0]] = values.get(0);
+          risks[index[0]]= values.get(1);
+          index[0]++;
+        }
+    );
+
+    return new DualAxesOptions(categoriesListString, integers, risks);
   }
 }

@@ -31,20 +31,9 @@ function view1Controller(appService, $scope, $log) {
     }, function (error) {
       // pass the error the the error service
       var result = error.data;
-      filter(result)
+      filter(result);
       $scope.basicAreaChart = result;
     });
-}
-
-function clean(obj) {
-  var propNames = Object.getOwnPropertyNames(obj);
-  for (var i = 0; i < propNames.length; i++) {
-    var propName = propNames[i];
-    if (obj[propName] === null || obj[propName] === undefined) {
-      delete obj[propName];
-    }
-  }
-  return obj;
 }
 
 function filter(obj) {
@@ -58,15 +47,4 @@ function filter(obj) {
     else if (typeof value !== 'undefined' && $.isArray(value))
       value.forEach(function (el){filter(el)});
   });
-  //
-  //$.each(obj, function(key, value){
-  //  if (value === "" || value === null){
-  //    delete obj[key];
-  //  } else if (Object.prototype.toString.call(value) === '[object Object]') {
-  //    filter(value);
-  //  } else if ($.isArray(value)) {
-  //    $.each(value, function (k,v) { filter(v); });
-  //  }
-  //});
-  //return obj;
 }

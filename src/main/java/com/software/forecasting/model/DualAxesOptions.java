@@ -120,7 +120,7 @@ public class DualAxesOptions extends Options {
                     0})));
   }
 
-  public DualAxesOptions(List<String> categories) {
+  public DualAxesOptions(List<String> categories, Number[] integers, Number[] risks) {
 
 
     setChart(new ChartOptions()
@@ -186,25 +186,23 @@ public class DualAxesOptions extends Options {
         .setTooltip(new Tooltip()
             .setFormatter(null)
             .setValueSuffix(" times"))
-        .setData(
-            Arrays
-                .asList(numbersTotalEfforts)));
+        .setData(integers));
 
 
-    Number[] risks = {90,
-        90,
-        80,
-        80,
-        60,
-        60,
-        50,
-        40,
-        30,
-        30,
-        20,
-        10,
-        10,
-        0};
+//    Number[] risks = {90,
+//        90,
+//        80,
+//        80,
+//        60,
+//        60,
+//        50,
+//        40,
+//        30,
+//        30,
+//        20,
+//        10,
+//        10,
+//        0};
     addSeries(new SimpleSeries()
         .setName("Risk")
         .setType(SeriesType.SPLINE)
@@ -212,9 +210,7 @@ public class DualAxesOptions extends Options {
         .setTooltip(new Tooltip()
             .setFormatter(null)
             .setValueSuffix(" %"))
-        .setData(
-            Arrays
-                .asList(risks)));
+        .setData(risks));
   }
 
 }
