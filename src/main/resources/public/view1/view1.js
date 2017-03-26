@@ -18,7 +18,7 @@ function appServiceInit($http) {
   this.getBasicAreaChart = function () {
     return $http({
       "method": "get",
-      "url": 'data/basicAreaChart.json'
+      "url": '/getEstimationHighChart'
     });
   };
 }
@@ -49,6 +49,8 @@ function clean(obj) {
 
 function filter(obj) {
   $.each(obj, function(key, value) {
+    if (key == 'type' && value !== null)
+      obj[key] = value.toLowerCase();
     if (value === "" || value === null)
       delete obj[key];
     else if (typeof value !== 'undefined' && typeof value === 'object')
