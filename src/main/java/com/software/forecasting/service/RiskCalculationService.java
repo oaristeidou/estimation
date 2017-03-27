@@ -1,4 +1,4 @@
-package com.software.forecasting.model;
+package com.software.forecasting.service;
 
 import com.google.common.collect.Lists;
 import com.software.forecasting.model.SimulationResultBean;
@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 /**
  * Created by odyssefs on 20.03.17.
  */
-public class RiskCalculation {
+public class RiskCalculationService {
 
   public static List<SimulationResultBean> calculateRisk(List<Integer> efforts) {
     List<SimulationResultBean> simulationPartitionList = createEffortPartitions(efforts);

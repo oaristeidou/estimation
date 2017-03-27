@@ -1,7 +1,8 @@
-package com.software.forecasting.model;
+package com.software.forecasting.wrapper;
 
 import com.googlecode.wickedcharts.highcharts.options.*;
 import com.googlecode.wickedcharts.highcharts.options.series.SimpleSeries;
+import com.software.forecasting.model.SimulationResultBean;
 
 import java.util.ArrayList;
 import java.util.Arrays;

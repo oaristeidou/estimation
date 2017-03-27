@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 /**
  * Created by odyssefs on 18.03.17.
  */
-public class ReadCsvFileTest {
+public class FileReaderServiceTest {
 
   @Test
   public void testReadHistoricalData() throws Exception {
@@ -25,7 +25,7 @@ public class ReadCsvFileTest {
     expectedData.add(new HistoryDataBean(8, new HashSet<>(Arrays.asList("y"))));
     expectedData.add(new HistoryDataBean(9, new HashSet<>(Arrays.asList("y", "x"))));
 
-    List<HistoryDataBean> readHistoricalData = ReadCsvFile.readHistoricalData();
+    List<HistoryDataBean> readHistoricalData = FileReaderService.readHistoricalData();
     final int[] index = {0};
     readHistoricalData.forEach(
         (historyData -> {

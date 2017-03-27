@@ -1,4 +1,4 @@
-package com.software.forecasting.model;
+package com.software.forecasting.wrapper;
 
 import com.googlecode.wickedcharts.highcharts.options.Axis;
 

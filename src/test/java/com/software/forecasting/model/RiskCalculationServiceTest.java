@@ -1,5 +1,6 @@
 package com.software.forecasting.model;
 
+import com.software.forecasting.service.RiskCalculationService;
 import org.testng.annotations.Test;
 
 import java.util.*;
@@ -9,7 +10,7 @@ import static org.testng.Assert.*;
 /**
  * Created by odyssefs on 21.03.17.
  */
-public class RiskCalculationTest {
+public class RiskCalculationServiceTest {
 
   @Test
   public void testCalculateRisk() throws Exception {
@@ -30,7 +31,7 @@ public class RiskCalculationTest {
     expectedMap.add(new SimulationResultBean(46, 1, 10));
     expectedMap.add(new SimulationResultBean(48, 1, 0));
 
-    List<SimulationResultBean> simulationResultBeanList = RiskCalculation.calculateRisk(efforts);
+    List<SimulationResultBean> simulationResultBeanList = RiskCalculationService.calculateRisk(efforts);
     final int[] index = {0};
     expectedMap.forEach(
         expectedSimulation -> {

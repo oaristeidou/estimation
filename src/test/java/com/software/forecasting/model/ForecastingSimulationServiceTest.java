@@ -1,5 +1,6 @@
 package com.software.forecasting.model;
 
+import com.software.forecasting.service.ForecastingSimulationService;
 import org.testng.annotations.Test;
 
 import java.util.*;
@@ -9,7 +10,7 @@ import static org.testng.Assert.*;
 /**
  * Created by odyssefs on 19.03.17.
  */
-public class ForecastingSimulationTest {
+public class ForecastingSimulationServiceTest {
 
   @Test
   public void testSimulate() throws Exception {
@@ -18,6 +19,6 @@ public class ForecastingSimulationTest {
     futureTasks.add(new FutureTaskBean(2, new HashSet<>(Arrays.asList("x", "y")), new HashSet<>(Arrays.asList(1, 2, 3, 6, 8, 9))));
     futureTasks.add(new FutureTaskBean(3, new HashSet<>(Arrays.asList("-")), new HashSet<>(Arrays.asList(4, 7))));
 
-    assertTrue(ForecastingSimulation.simulate(futureTasks, 20).size() == 20);
+    assertTrue(ForecastingSimulationService.simulate(futureTasks, 20).size() == 20);
   }
 }
