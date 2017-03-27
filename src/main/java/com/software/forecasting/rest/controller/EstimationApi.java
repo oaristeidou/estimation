@@ -1,12 +1,7 @@
 package com.software.forecasting.rest.controller;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.google.common.base.Functions;
-import com.google.common.collect.Lists;
 import com.googlecode.wickedcharts.highcharts.options.*;
-import com.googlecode.wickedcharts.highcharts.options.series.SimpleSeries;
 import com.software.forecasting.model.*;
 import com.software.forecasting.service.ReadCsvFile;
 import org.springframework.http.HttpStatus;
@@ -25,31 +20,32 @@ public class EstimationApi {
   @ResponseStatus(HttpStatus.FOUND)
   @JsonSerialize(include = JsonSerialize.Inclusion.ALWAYS)
   public Options getEstimationHighChart() throws IOException {
-    Map<Integer, Set<String>> historicalData = ReadCsvFile.readHistoricalData();
+    List<FutureTaskBean> futureTaskBeen = new ArrayList<>();
+    futureTaskBeen.add(new FutureTaskBean(1, new HashSet<>(Arrays.asList("x"))));
+    futureTaskBeen.add(new FutureTaskBean(2, new HashSet<>(Arrays.asList("x", "y"))));
+    futureTaskBeen.add(new FutureTaskBean(3, new HashSet<>(Arrays.asList("-"))));
 
-    Map<Integer, List<String>> futureTasks = new HashMap<>();
-    futureTasks.put(1, new ArrayList<>(Arrays.asList("x")));
-    futureTasks.put(2, new ArrayList<>(Arrays.asList("x", "y")));
-    futureTasks.put(3, new ArrayList<>(Arrays.asList("-")));
-    Map<List<String>, Set<Integer>> categoriseData = FutureTask.categorise(futureTasks, historicalData);
+    List<HistoryDataBean> historicalData = ReadCsvFile.readHistoricalData();
+    FutureTaskBean.categorise(futureTaskBeen, historicalData);
+    List<Integer> efforts = ForecastingSimulation.simulate(futureTaskBeen);
 
-    List<Integer> efforts = ForecastingSimulation.simulate(categoriseData, futureTasks);
+//    Map<Integer, List<Integer>> calculateRisk = RiskCalculation.calculateRisk(efforts);
+//
+//    List<String> categoriesListString = Lists.transform(efforts, Functions.toStringFunction());
 
-    Map<Integer, List<Integer>> calculateRisk = RiskCalculation.calculateRisk(efforts);
+//    Number[] integers = new Number[calculateRisk.size()];
+//    Number[] risks = new Number[calculateRisk.size()];
+//    List<String> numbers = new ArrayList<>();
+//    final int[] index = {0};
+//    calculateRisk.forEach(
+//        (key, values) -> {
+//          numbers.add(String.valueOf(key));
+//          integers[index[0]] = values.get(0);
+//          risks[index[0]]= values.get(1);
+//          index[0]++;
+//        }
+//    );
 
-    List<String> categoriesListString = Lists.transform(efforts, Functions.toStringFunction());
-
-    Number[] integers = new Number[calculateRisk.size()];
-    Number[] risks = new Number[calculateRisk.size()];
-    final int[] index = {0};
-    calculateRisk.forEach(
-        (key, values) -> {
-          integers[index[0]] = values.get(0);
-          risks[index[0]]= values.get(1);
-          index[0]++;
-        }
-    );
-
-    return new DualAxesOptions(categoriesListString, integers, risks);
+    return null;
   }
 }

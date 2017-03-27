@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
  */
 public class ForecastingSimulation {
 
-  public static List<Integer> simulate(Map<List<String>, Set<Integer>> futureTasksCategories, Map<Integer, List<String>> futureTasks) {
+  public static List<Integer> simulate(List<FutureTaskBean> futureTasksList) {
     List<Integer> efforts = new ArrayList<>();
 
     IntStream
@@ -18,11 +18,11 @@ public class ForecastingSimulation {
             i -> {
               final Integer[] sum = {0};
               Random randomGenerator = new Random();
-              futureTasks.forEach(
-                  (effort, tasks) -> IntStream.range(0, effort).forEach(j -> {
-                        Object[] integers = futureTasksCategories.get(tasks).toArray();
-                        int randomIndex = randomGenerator.nextInt(integers.length);
-                        sum[0] += (Integer) integers[randomIndex];
+              futureTasksList.forEach(
+                  (futureTask) -> IntStream.range(0, futureTask.getEffort()).forEach(j -> {
+                        Set<Integer> integers = futureTask.getCategoryEfforts();
+                        int randomIndex = randomGenerator.nextInt(integers.size());
+                        sum[0] += (Integer) integers.toArray()[randomIndex];
                       }
                   )
               );
