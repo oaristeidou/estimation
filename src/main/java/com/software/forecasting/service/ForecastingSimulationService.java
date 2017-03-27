@@ -1,4 +1,4 @@
-package com.software.forecasting.model;
+package com.software.forecasting.service;
 
 import com.software.forecasting.model.FutureTaskBean;
 
@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 /**
  * Created by odyssefs on 19.03.17.
  */
-public class ForecastingSimulation {
+public class ForecastingSimulationService {
 
   public static List<Integer> simulate(List<FutureTaskBean> futureTasksList, int endExclusive) {
     List<Integer> efforts = new ArrayList<>();

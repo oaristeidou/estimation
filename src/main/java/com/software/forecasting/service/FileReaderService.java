@@ -12,9 +12,9 @@ import java.util.*;
 /**
  * Created by odyssefs on 18.03.17.
  */
-public class ReadCsvFile {
+public class FileReaderService {
 
-  private static final String fileName = ReadCsvFile.class.getClassLoader().getResource("docs/historical-data.csv").getPath();
+  private static final String fileName = FileReaderService.class.getClassLoader().getResource("docs/historical-data.csv").getPath();
 
   public static List<HistoryDataBean> readHistoricalData() throws IOException {
     FileReader fileReader = new FileReader(fileName);
