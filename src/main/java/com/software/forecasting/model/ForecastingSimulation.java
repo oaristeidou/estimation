@@ -1,5 +1,7 @@
 package com.software.forecasting.model;
 
+import com.software.forecasting.model.FutureTaskBean;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -9,11 +11,11 @@ import java.util.stream.IntStream;
  */
 public class ForecastingSimulation {
 
-  public static List<Integer> simulate(List<FutureTaskBean> futureTasksList) {
+  public static List<Integer> simulate(List<FutureTaskBean> futureTasksList, int endExclusive) {
     List<Integer> efforts = new ArrayList<>();
 
     IntStream
-        .range(0, 20)
+        .range(0, endExclusive)
         .forEach(
             i -> {
               final Integer[] sum = {0};

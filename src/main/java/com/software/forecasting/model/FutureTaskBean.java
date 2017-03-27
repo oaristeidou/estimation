@@ -22,6 +22,12 @@ public class FutureTaskBean {
     this.tasks = tasks;
   }
 
+  public FutureTaskBean(Integer effort, Set<String> tasks, Set<Integer> categoryEfforts) {
+    this.effort = effort;
+    this.tasks = tasks;
+    this.categoryEfforts = categoryEfforts;
+  }
+
   public static void categorise(List<FutureTaskBean> futureTaskList, List<HistoryDataBean> historicalData) {
     futureTaskList.forEach((futureTask) -> {
       Set<Integer> futureTaskEfforts = new HashSet<>();

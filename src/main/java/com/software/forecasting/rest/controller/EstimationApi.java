@@ -4,6 +4,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.googlecode.wickedcharts.highcharts.options.*;
 import com.software.forecasting.model.*;
 import com.software.forecasting.service.ReadCsvFile;
+import com.software.forecasting.model.RiskCalculation;
+import com.software.forecasting.model.DualAxesOptions;
+import com.software.forecasting.model.ForecastingSimulation;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,28 +27,12 @@ public class EstimationApi {
     futureTaskBeen.add(new FutureTaskBean(1, new HashSet<>(Arrays.asList("x"))));
     futureTaskBeen.add(new FutureTaskBean(2, new HashSet<>(Arrays.asList("x", "y"))));
     futureTaskBeen.add(new FutureTaskBean(3, new HashSet<>(Arrays.asList("-"))));
+    int simulationLoop = 20;
 
     List<HistoryDataBean> historicalData = ReadCsvFile.readHistoricalData();
     FutureTaskBean.categorise(futureTaskBeen, historicalData);
-    List<Integer> efforts = ForecastingSimulation.simulate(futureTaskBeen);
+    List<Integer> efforts = ForecastingSimulation.simulate(futureTaskBeen, simulationLoop);
 
-//    Map<Integer, List<Integer>> calculateRisk = RiskCalculation.calculateRisk(efforts);
-//
-//    List<String> categoriesListString = Lists.transform(efforts, Functions.toStringFunction());
-
-//    Number[] integers = new Number[calculateRisk.size()];
-//    Number[] risks = new Number[calculateRisk.size()];
-//    List<String> numbers = new ArrayList<>();
-//    final int[] index = {0};
-//    calculateRisk.forEach(
-//        (key, values) -> {
-//          numbers.add(String.valueOf(key));
-//          integers[index[0]] = values.get(0);
-//          risks[index[0]]= values.get(1);
-//          index[0]++;
-//        }
-//    );
-
-    return null;
+    return new DualAxesOptions(RiskCalculation.calculateRisk(efforts));
   }
 }
