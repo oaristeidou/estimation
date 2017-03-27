@@ -1,10 +1,9 @@
 package com.software.forecasting.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.googlecode.wickedcharts.highcharts.options.*;
-import com.googlecode.wickedcharts.highcharts.options.color.HexColor;
 import com.googlecode.wickedcharts.highcharts.options.series.SimpleSeries;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -120,8 +119,21 @@ public class DualAxesOptions extends Options {
                     0})));
   }
 
-  public DualAxesOptions(List<String> categories, Number[] integers, Number[] risks) {
+  public DualAxesOptions(List<SimulationResultBean> simulationResultBeen) {
 
+    List<String> categories = new ArrayList<>();
+    Number[] integers = new Number[simulationResultBeen.size()];
+    Number[] risks = new Number[simulationResultBeen.size()];
+
+    final int[] index = {0};
+    simulationResultBeen.forEach(
+        simulation ->{
+          categories.add(String.valueOf(simulation.getTotal()));
+          integers[index[0]] = simulation.getN();
+          risks[index[0]] = simulation.getRisk();
+          index[0]++;
+        }
+    );
 
     setChart(new ChartOptions()
         .setZoomType(ZoomType.XY));
