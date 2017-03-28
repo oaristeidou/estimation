@@ -18,7 +18,7 @@ function appServiceInit($http) {
   this.getBasicAreaChart = function () {
     return $http({
       "method": "get",
-      "url": '/getEstimationHighChart'
+      "url": '/estimationHighChart'
     });
   };
 }

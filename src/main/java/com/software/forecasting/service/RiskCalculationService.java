@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
  */
 public class RiskCalculationService {
 
-  public static List<SimulationResultBean> calculateRisk(List<Integer> efforts) {
+  public List<SimulationResultBean> calculateRisk(List<Integer> efforts) {
     List<SimulationResultBean> simulationPartitionList = createEffortPartitions(efforts);
     List<SimulationResultBean> compressedSimulationList = mergeDuplicationEfforts(efforts);
     return makeRiskEffort(compressedSimulationList, simulationPartitionList);
@@ -31,7 +31,7 @@ public class RiskCalculationService {
     return compressedSimulationList;
   }
 
-  private static List<SimulationResultBean> mergeDuplicationEfforts(List<Integer> efforts) {
+  private List<SimulationResultBean> mergeDuplicationEfforts(List<Integer> efforts) {
     List<Integer> removeEffortDuplication = new ArrayList<>(new LinkedHashSet(efforts));
     List<SimulationResultBean> compressedSimulationList = new ArrayList<>();
     removeEffortDuplication.forEach(effort -> compressedSimulationList.add(new SimulationResultBean(effort, Collections.frequency(efforts, effort), null))
@@ -39,7 +39,7 @@ public class RiskCalculationService {
     return compressedSimulationList;
   }
 
-  private static List<SimulationResultBean> createEffortPartitions(List<Integer> efforts) {
+  private List<SimulationResultBean> createEffortPartitions(List<Integer> efforts) {
     int partitionRisk = 20;
     List<SimulationResultBean> simulationPartitionList = new ArrayList<>();
     IntStream.range(0, 10).forEach(
