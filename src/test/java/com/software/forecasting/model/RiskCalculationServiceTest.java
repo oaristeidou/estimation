@@ -23,16 +23,16 @@ public class RiskCalculationServiceTest {
     expectedMap.add(new SimulationResultBean(15, 1, 90));
     expectedMap.add(new SimulationResultBean(17, 2, 90));
     expectedMap.add(new SimulationResultBean(20, 1, 80));
-    expectedMap.add(new SimulationResultBean(24, 1, 70));
+    expectedMap.add(new SimulationResultBean(24, 1, 80));
     expectedMap.add(new SimulationResultBean(27, 3, 60));
-    expectedMap.add(new SimulationResultBean(30, 1, 50));
+    expectedMap.add(new SimulationResultBean(30, 1, 60));
     expectedMap.add(new SimulationResultBean(34, 1, 50));
     expectedMap.add(new SimulationResultBean(35, 2, 40));
     expectedMap.add(new SimulationResultBean(38, 2, 30));
-    expectedMap.add(new SimulationResultBean(39, 1, 20));
+    expectedMap.add(new SimulationResultBean(39, 1, 30));
     expectedMap.add(new SimulationResultBean(42, 2, 20));
     expectedMap.add(new SimulationResultBean(45, 1, 10));
-    expectedMap.add(new SimulationResultBean(46, 1, 0));
+    expectedMap.add(new SimulationResultBean(46, 1, 10));
     expectedMap.add(new SimulationResultBean(48, 1, 0));
 
     List<SimulationResultBean> simulationResultBeanList = riskCalculationService.calculateRisk(efforts);

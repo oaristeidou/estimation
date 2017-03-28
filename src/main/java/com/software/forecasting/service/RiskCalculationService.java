@@ -18,15 +18,18 @@ public class RiskCalculationService {
   }
 
   private static List<SimulationResultBean> makeRiskEffort(List<SimulationResultBean> compressedSimulationList, List<SimulationResultBean> simulationPartitionList) {
-    for (SimulationResultBean simPartition : Lists.reverse(simulationPartitionList)) {
+    int index = 0;
+    List<SimulationResultBean> simulationPartitionReversedList = Lists.reverse(simulationPartitionList);
+    for (SimulationResultBean simPartition : simulationPartitionReversedList) {
       for (SimulationResultBean simulation : compressedSimulationList) {
-        if (Objects.equals(simPartition.getTotal(), simulation.getTotal())) {
+        if (Objects.equals(simPartition.getTotal(), simulation.getTotal()) || index == 0) {
           simulation.setRisk(simPartition.getRisk());
           break;
         } else if (simulation.getRisk() == null) {
-          simulation.setRisk(simPartition.getRisk());
+          simulation.setRisk(simulationPartitionReversedList.get(index - 1).getRisk());
         }
       }
+      index++;
     }
     return compressedSimulationList;
   }
