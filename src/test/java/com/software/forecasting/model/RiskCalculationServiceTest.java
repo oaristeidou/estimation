@@ -35,7 +35,7 @@ public class RiskCalculationServiceTest {
     expectedMap.add(new SimulationBean(46, 1, 10));
     expectedMap.add(new SimulationBean(48, 1, 0));
 
-    List<SimulationBean> simulationBeanList = riskCalculationService.calculateRisk(efforts);
+    List<SimulationBean> simulationBeanList = riskCalculationService.calculateRisk(efforts, 20);
     final int[] index = {0};
     expectedMap.forEach(
         expectedSimulation -> {

@@ -36,6 +36,6 @@ public class EstimationApi {
     List<FutureTaskBean> futureTasks = forecastingCategorizationService.categorise(futureTaskBeans, historicalData);
     List<Integer> efforts = forecastingSimulationService.simulate(futureTasks, simulationLoops);
 
-    return new DualAxesOptions(riskCalculationService.calculateRisk(efforts));
+    return new DualAxesOptions(riskCalculationService.calculateRisk(efforts, simulationLoops));
   }
 }
