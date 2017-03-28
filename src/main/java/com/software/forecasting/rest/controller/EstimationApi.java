@@ -1,13 +1,12 @@
 package com.software.forecasting.rest.controller;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.base.Splitter;
 import com.googlecode.wickedcharts.highcharts.options.*;
 import com.software.forecasting.model.*;
-import com.software.forecasting.service.FileReaderService;
-import com.software.forecasting.service.ForecastingCategorizationService;
-import com.software.forecasting.service.RiskCalculationService;
+import com.software.forecasting.service.*;
 import com.software.forecasting.wrapper.DualAxesOptions;
-import com.software.forecasting.service.ForecastingSimulationService;
+import jdk.nashorn.internal.runtime.JSType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -25,21 +24,17 @@ public class EstimationApi {
   private final ForecastingCategorizationService forecastingCategorizationService = new ForecastingCategorizationService();
   private final FileReaderService fileReaderService = new FileReaderService();
   private final RiskCalculationService riskCalculationService = new RiskCalculationService();
+  private final ParameterParserService parameterParserService = new ParameterParserService();
 
 
   @RequestMapping(value = "/estimationHighChart", method = RequestMethod.GET)
   @ResponseStatus(HttpStatus.FOUND)
   @JsonSerialize(include = JsonSerialize.Inclusion.ALWAYS)
-  public Options getEstimationHighChart() throws IOException {
-    List<FutureTaskBean> futureTaskBeans = new ArrayList<>();
-    futureTaskBeans.add(new FutureTaskBean(1, new HashSet<>(Arrays.asList("x"))));
-    futureTaskBeans.add(new FutureTaskBean(2, new HashSet<>(Arrays.asList("x", "y"))));
-    futureTaskBeans.add(new FutureTaskBean(3, new HashSet<>(Arrays.asList("-"))));
-    int simulationLoop = 20;
-
+  public Options getEstimationHighChart(@RequestParam(value = "futureTasks") String tasks, @RequestParam(value = "counts") Integer simulationLoops) throws IOException {
+    List<FutureTaskBean> futureTaskBeans = parameterParserService.parseParams(tasks);
     List<HistoryDataBean> historicalData = fileReaderService.readHistoricalData();
     List<FutureTaskBean> futureTasks = forecastingCategorizationService.categorise(futureTaskBeans, historicalData);
-    List<Integer> efforts = forecastingSimulationService.simulate(futureTasks, simulationLoop);
+    List<Integer> efforts = forecastingSimulationService.simulate(futureTasks, simulationLoops);
 
     return new DualAxesOptions(riskCalculationService.calculateRisk(efforts));
   }
