@@ -21,23 +21,20 @@ import java.util.*;
 @RestController
 public class EstimationApi {
 
-  private final ForecastingSimulationService forecastingSimulationService;
-  private final ForecastingCategorizationService forecastingCategorizationService;
-  private final FileReaderService fileReaderService;
-  private final RiskCalculationService riskCalculationService;
+  private final ForecastingSimulationService forecastingSimulationService = new ForecastingSimulationService();
+  private final ForecastingCategorizationService forecastingCategorizationService = new ForecastingCategorizationService();
+  private final FileReaderService fileReaderService = new FileReaderService();
+  private final RiskCalculationService riskCalculationService = new RiskCalculationService();
 
-  @Autowired
-  public EstimationApi(ForecastingSimulationService forecastingSimulationService, ForecastingCategorizationService forecastingCategorizationService, FileReaderService fileReaderService, RiskCalculationService riskCalculationService) {
-    this.forecastingSimulationService = forecastingSimulationService;
-    this.forecastingCategorizationService = forecastingCategorizationService;
-    this.fileReaderService = fileReaderService;
-    this.riskCalculationService = riskCalculationService;
-  }
 
   @RequestMapping(value = "/estimationHighChart", method = RequestMethod.GET)
   @ResponseStatus(HttpStatus.FOUND)
   @JsonSerialize(include = JsonSerialize.Inclusion.ALWAYS)
-  public Options getEstimationHighChart(@RequestBody final List<FutureTaskBean> futureTaskBeans) throws IOException {
+  public Options getEstimationHighChart() throws IOException {
+    List<FutureTaskBean> futureTaskBeans = new ArrayList<>();
+    futureTaskBeans.add(new FutureTaskBean(1, new HashSet<>(Arrays.asList("x"))));
+    futureTaskBeans.add(new FutureTaskBean(2, new HashSet<>(Arrays.asList("x", "y"))));
+    futureTaskBeans.add(new FutureTaskBean(3, new HashSet<>(Arrays.asList("-"))));
     int simulationLoop = 20;
 
     List<HistoryDataBean> historicalData = fileReaderService.readHistoricalData();
