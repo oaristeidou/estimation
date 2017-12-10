@@ -1,6 +1,8 @@
 package com.software.forecasting.model;
 
 
+import com.software.forecasting.service.ForecastingCategorizationService;
+import mockit.Tested;
 import org.testng.annotations.Test;
 
 import java.util.*;
@@ -11,6 +13,9 @@ import static org.testng.Assert.assertEquals;
  * Created by odyssefs on 18.03.17.
  */
 public class FutureTaskBeanTest {
+
+  @Tested
+  private ForecastingCategorizationService forecastingCategorizationService;
 
   @Test
   public void testCategorise() throws Exception {
@@ -36,10 +41,9 @@ public class FutureTaskBeanTest {
     exceptedCategorisedData.add(new CategoriseBean(new FutureTaskBean(new HashSet<>(Arrays.asList("x", "y"))), new HashSet<>(Arrays.asList(1, 2, 3, 6, 8, 9))));
     exceptedCategorisedData.add(new CategoriseBean(new FutureTaskBean(new HashSet<>(Arrays.asList("-"))), new HashSet<>(Arrays.asList(4, 7))));
 
-    FutureTaskBean.categorise(futureTasksList, historicalData);
-
+    List<FutureTaskBean> futureTaskBeanList = forecastingCategorizationService.categorise(futureTasksList, historicalData);
     final int[] index = {0};
-    futureTasksList.forEach(
+    futureTaskBeanList.forEach(
         (futureTask) -> {
           assertEquals(futureTask.getCategoryEfforts(), exceptedCategorisedData.get(index[0]).getCategoryEfforts());
           index[0]++;

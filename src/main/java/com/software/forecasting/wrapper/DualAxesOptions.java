@@ -2,7 +2,7 @@ package com.software.forecasting.wrapper;
 
 import com.googlecode.wickedcharts.highcharts.options.*;
 import com.googlecode.wickedcharts.highcharts.options.series.SimpleSeries;
-import com.software.forecasting.model.SimulationResultBean;
+import com.software.forecasting.model.SimulationBean;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -120,7 +120,7 @@ public class DualAxesOptions extends Options {
                     0})));
   }
 
-  public DualAxesOptions(List<SimulationResultBean> simulationResultBeen) {
+  public DualAxesOptions(List<SimulationBean> simulationResultBeen) {
 
     List<String> categories = new ArrayList<>();
     Number[] integers = new Number[simulationResultBeen.size()];

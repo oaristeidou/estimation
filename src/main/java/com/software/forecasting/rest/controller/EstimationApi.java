@@ -3,10 +3,8 @@ package com.software.forecasting.rest.controller;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.googlecode.wickedcharts.highcharts.options.*;
 import com.software.forecasting.model.*;
-import com.software.forecasting.service.FileReaderService;
-import com.software.forecasting.service.RiskCalculationService;
+import com.software.forecasting.service.*;
 import com.software.forecasting.wrapper.DualAxesOptions;
-import com.software.forecasting.service.ForecastingSimulationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,20 +17,22 @@ import java.util.*;
 @RestController
 public class EstimationApi {
 
-  @RequestMapping(value = "/getEstimationHighChart", method = RequestMethod.GET)
+  private final ForecastingSimulationService forecastingSimulation = new ForecastingSimulationService();
+  private final ForecastingCategorizationService forecastingCategorization = new ForecastingCategorizationService();
+  private final FileReaderService fileReaderAdaptor = new FileReaderService();
+  private final RiskCalculationService riskCalculation = new RiskCalculationService();
+  private final ParameterParserService parameterParser = new ParameterParserService();
+
+  @RequestMapping(value = "/estimationHighChart", method = RequestMethod.GET)
   @ResponseStatus(HttpStatus.FOUND)
   @JsonSerialize(include = JsonSerialize.Inclusion.ALWAYS)
-  public Options getEstimationHighChart() throws IOException {
-    List<FutureTaskBean> futureTaskBeen = new ArrayList<>();
-    futureTaskBeen.add(new FutureTaskBean(1, new HashSet<>(Arrays.asList("x"))));
-    futureTaskBeen.add(new FutureTaskBean(2, new HashSet<>(Arrays.asList("x", "y"))));
-    futureTaskBeen.add(new FutureTaskBean(3, new HashSet<>(Arrays.asList("-"))));
-    int simulationLoop = 20;
+  public Options getEstimationHighChart(@RequestParam(value = "futureTasks") String tasks, @RequestParam(value = "counts") Integer simulationLoops) throws IOException {
+    List<FutureTaskBean> futureTaskBeans = parameterParser.parseParams(tasks);
+    List<HistoryDataBean> historicalData = fileReaderAdaptor.readHistoricalData();
+    List<FutureTaskBean> futureTasks = forecastingCategorization.categorise(futureTaskBeans, historicalData);
+    List<Integer> efforts = forecastingSimulation.simulate(futureTasks, simulationLoops);
+    List<SimulationBean> simulationResultBeans = riskCalculation.calculateRisk(efforts, simulationLoops);
 
-    List<HistoryDataBean> historicalData = FileReaderService.readHistoricalData();
-    FutureTaskBean.categorise(futureTaskBeen, historicalData);
-    List<Integer> efforts = ForecastingSimulationService.simulate(futureTaskBeen, simulationLoop);
-
-    return new DualAxesOptions(RiskCalculationService.calculateRisk(efforts));
+    return new DualAxesOptions(simulationResultBeans);
   }
 }

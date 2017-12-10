@@ -2,21 +2,21 @@ package com.software.forecasting.model;
 /**
  * Created by odyssefs on 27.03.17.
  */
-public class SimulationResultBean {
+public class SimulationBean {
   private Integer total;
   private Integer n;
   private Integer risk;
 
-  public SimulationResultBean() {
+  public SimulationBean() {
   }
 
-  public SimulationResultBean(Integer total, Integer n, Integer risk) {
+  public SimulationBean(Integer total, Integer n, Integer risk) {
     this.total = total;
     this.n = n;
     this.risk = risk;
   }
 
-  public SimulationResultBean(Integer total, Integer risk) {
+  public SimulationBean(Integer total, Integer risk) {
     this.total = total;
     this.risk = risk;
   }

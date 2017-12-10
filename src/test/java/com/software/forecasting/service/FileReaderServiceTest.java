@@ -1,6 +1,7 @@
 package com.software.forecasting.service;
 
 import com.software.forecasting.model.HistoryDataBean;
+import mockit.Tested;
 import org.junit.Test;
 
 import java.util.*;
@@ -11,6 +12,9 @@ import static org.junit.Assert.*;
  * Created by odyssefs on 18.03.17.
  */
 public class FileReaderServiceTest {
+
+  @Tested
+  private FileReaderService fileReaderService;
 
   @Test
   public void testReadHistoricalData() throws Exception {
@@ -25,7 +29,7 @@ public class FileReaderServiceTest {
     expectedData.add(new HistoryDataBean(8, new HashSet<>(Arrays.asList("y"))));
     expectedData.add(new HistoryDataBean(9, new HashSet<>(Arrays.asList("y", "x"))));
 
-    List<HistoryDataBean> readHistoricalData = FileReaderService.readHistoricalData();
+    List<HistoryDataBean> readHistoricalData = fileReaderService.readHistoricalData();
     final int[] index = {0};
     readHistoricalData.forEach(
         (historyData -> {

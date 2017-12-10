@@ -16,7 +16,7 @@ public class FileReaderService {
 
   private static final String fileName = FileReaderService.class.getClassLoader().getResource("docs/historical-data.csv").getPath();
 
-  public static List<HistoryDataBean> readHistoricalData() throws IOException {
+  public List<HistoryDataBean> readHistoricalData() throws IOException {
     FileReader fileReader = new FileReader(fileName);
     CSVParser historicalDataFileParse = new CSVParser(fileReader, CSVFormat.newFormat(';'));
     List<HistoryDataBean> historicalData = new ArrayList<>();

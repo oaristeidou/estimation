@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
  */
 public class ForecastingSimulationService {
 
-  public static List<Integer> simulate(List<FutureTaskBean> futureTasksList, int endExclusive) {
+  public List<Integer> simulate(List<FutureTaskBean> futureTasksList, int endExclusive) {
     List<Integer> efforts = new ArrayList<>();
 
     IntStream

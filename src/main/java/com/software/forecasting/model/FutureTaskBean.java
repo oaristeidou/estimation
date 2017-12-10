@@ -28,21 +28,6 @@ public class FutureTaskBean {
     this.categoryEfforts = categoryEfforts;
   }
 
-  public static void categorise(List<FutureTaskBean> futureTaskList, List<HistoryDataBean> historicalData) {
-    futureTaskList.forEach((futureTask) -> {
-      Set<Integer> futureTaskEfforts = new HashSet<>();
-      historicalData.forEach(
-          (historicalEntry) -> futureTask.getTasks().forEach(
-              (task) -> {
-                if (historicalEntry.getTasks().contains(task))
-                  futureTaskEfforts.add(historicalEntry.getEffort());
-              }
-          )
-      );
-      futureTask.setCategoryEfforts(futureTaskEfforts);
-    });
-  }
-
   public Set<Integer> getCategoryEfforts() {
     return categoryEfforts;
   }

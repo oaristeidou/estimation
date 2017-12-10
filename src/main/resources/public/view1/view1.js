@@ -15,29 +15,34 @@ angular
   .controller('View1Ctrl', view1Controller);
 
 function appServiceInit($http) {
-  this.getBasicAreaChart = function () {
+  this.getBasicAreaChart = function (simulation) {
     return $http({
       "method": "get",
-      "url": '/getEstimationHighChart'
+      "url": '/estimationHighChart',
+      "params": {futureTasks: simulation.futureTasks, counts: simulation.counts}
     });
   };
 }
 
 function view1Controller(appService, $scope, $log) {
-  $scope.chartObj; // this will contain a reference to the highcharts' chart object
-  appService.getBasicAreaChart()
-    .then(function (data) {
-      $scope.basicAreaChart = data.data;
-    }, function (error) {
-      // pass the error the the error service
-      var result = error.data;
-      filter(result);
-      $scope.basicAreaChart = result;
-    });
+  $scope.chartObj;
+  $scope.runSimulation = function (simulation) {
+    appService.getBasicAreaChart(simulation)
+      .then(function (result) {
+        var resultData = result.data;
+        filter(resultData);
+        $scope.basicAreaChart = resultData;
+      }, function (error) {
+        // pass the error the the error service
+        var result = error.data;
+        filter(result);
+        $scope.basicAreaChart = result;
+      });
+  };
 }
 
 function filter(obj) {
-  $.each(obj, function(key, value) {
+  $.each(obj, function (key, value) {
     if (key == 'type' && value !== null)
       obj[key] = value.toLowerCase();
     if (value === "" || value === null)
@@ -45,6 +50,8 @@ function filter(obj) {
     else if (typeof value !== 'undefined' && typeof value === 'object')
       filter(value);
     else if (typeof value !== 'undefined' && $.isArray(value))
-      value.forEach(function (el){filter(el)});
+      value.forEach(function (el) {
+        filter(el)
+      });
   });
 }
